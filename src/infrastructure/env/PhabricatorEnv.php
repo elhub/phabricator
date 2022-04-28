@@ -124,7 +124,8 @@ final class PhabricatorEnv extends Phobject {
 
     // If an instance identifier is defined, write it into the environment so
     // it's available to subprocesses.
-    $instance = self::getEnvConfig('cluster.instance');
+    $instance = phutil_string_cast(self::getEnvConfig('cluster.instance'));
+    // $instance = self::getEnvConfig('cluster.instance'); Fix for  T13588
     if (strlen($instance)) {
       putenv('PHABRICATOR_INSTANCE='.$instance);
       $_ENV['PHABRICATOR_INSTANCE'] = $instance;
